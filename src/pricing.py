@@ -14,11 +14,17 @@ def format_currency(value):
 
 def apply_discount(price, percent):
     """
-    Reduce price by 'percent' (e.g., 10 means 10%).
+    Apply a percentage discount to a price.
+
+    price: original price (float)
+    percent: discount percentage (0-100), e.g. 10 for 10% off.
     """
     if percent < 0:
         raise ValueError("percent must be >= 0")
-    return price - price * percent  # BUG: should be (percent / 100)
+    # Convert percent to a fraction:
+    discount_fraction = percent / 100.0
+    return price * (1.0 - discount_fraction)
+
 
 def add_tax(price, rate=0.07):
     if rate < 0:
